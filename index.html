@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir archivos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="project-bar">
+            <h2><span class="first">Resultados de Aprendizaje</span><span class="second"> Ingeniería Industrial</span></h2>
+            <img src="https://escuelaing.s3.amazonaws.com/production/images/Logotipo-ESCUELA-sin-VM.width-380.png?AWSAccessKeyId=AKIAWFY3NGTFJHVI634A&Signature=KsDzYJvVXc57TMoV6n6%2BuEk9Foo%3D&Expires=1730247832" alt="Logo Universidad" class="logo-universidad">
+        </div>
+    </header>
+
+    <form action="{{ url_for('upload_files') }}" method="post" enctype="multipart/form-data">
+        <div class="file-upload-wrapper">
+            <label for="file-upload" class="custom-file-upload">
+                Elegir Archivos
+            </label>
+            <input id="file-upload" type="file" name="files" multiple>
+            <input type="submit" value="Subir Archivos">
+        </div>
+        <div id="file-list-panel">
+            <h3>Archivos Seleccionados:</h3>
+            <ul id="file-list"></ul>
+        </div>
+    </form>
+    
+    <footer>
+        <p>Miguel Angel Hernández Torres | 
+        <a href="mailto:miguel.hernandez-t@mail.escuelaing.edu.co">miguel.hernandez-t@mail.escuelaing.edu.co</a> | 
+        Insta: <a href="https://instagram.com/miguehache15" target="_blank">@miguehache15</a> | 
+        GitHub: <a href="https://github.com/MigueloHTS" target="_blank">@MigueloHTS</a></p>
+    </footer>
+
+    <script>
+        const fileInput = document.getElementById('file-upload');
+        const fileList = document.getElementById('file-list');
+
+        fileInput.addEventListener('change', () => {
+            fileList.innerHTML = '';  // Limpiar la lista anterior
+            const files = fileInput.files;
+            for (let i = 0; i < files.length; i++) {
+                const li = document.createElement('li');
+                li.textContent = files[i].name;
+                fileList.appendChild(li);
+            }
+        });
+    </script>
+</body>
+</html>
+
